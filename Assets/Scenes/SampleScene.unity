@@ -3596,8 +3596,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea9eb19ad86f5134bb2083e1561c3fc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wayPoints: []
-  links: []
+  wayPoints:
+  - {fileID: 290642106}
+  - {fileID: 1093466969}
+  - {fileID: 1756088387}
+  - {fileID: 1976158565}
+  - {fileID: 154520092}
+  - {fileID: 555059592}
+  links:
+  - node1: {fileID: 0}
+    node2: {fileID: 0}
+    dir: 1
+  - node1: {fileID: 290642106}
+    node2: {fileID: 1976158565}
+    dir: 1
+  - node1: {fileID: 290642106}
+    node2: {fileID: 1756088387}
+    dir: 1
+  - node1: {fileID: 1756088387}
+    node2: {fileID: 1976158565}
+    dir: 1
+  - node1: {fileID: 290642106}
+    node2: {fileID: 1093466969}
+    dir: 1
+  - node1: {fileID: 1093466969}
+    node2: {fileID: 1756088387}
+    dir: 1
+  - node1: {fileID: 1093466969}
+    node2: {fileID: 555059592}
+    dir: 1
+  - node1: {fileID: 1093466969}
+    node2: {fileID: 154520092}
+    dir: 1
+  - node1: {fileID: 154520092}
+    node2: {fileID: 290642106}
+    dir: 1
+  - node1: {fileID: 154520092}
+    node2: {fileID: 1976158565}
+    dir: 1
+  - node1: {fileID: 1093466969}
+    node2: {fileID: 555059592}
+    dir: 1
 --- !u!4 &1523051549
 Transform:
   m_ObjectHideFlags: 0
