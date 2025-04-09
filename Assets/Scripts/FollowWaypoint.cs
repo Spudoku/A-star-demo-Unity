@@ -5,58 +5,63 @@ using UnityEngine;
 public class FollowWaypoint : MonoBehaviour
 {
 
-    public GameObject[] waypoints;
+    Transform goal;
 
-    GameObject tracker;
-    int currentWayPoint = 0;
+    float speed = 5.0f;
+    float accuracy = 5.0f;
+    float rotSpeed = 2.0f;
 
-    public float rotSpeed = 30f;
-    public float speed = 10.0f;
+    public GameObject wpManager;
+    GameObject[] wps;
+    GameObject currentNode;
+    int curWP = 0;      // tracks index in a path, not in overall waypoint list
+    Graph g;
+
 
     public float lookAhead = 10f;
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        tracker = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-        DestroyImmediate(tracker.GetComponent<Collider>());
-        tracker.GetComponent<MeshRenderer>().enabled = false;
-        tracker.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        wps = wpManager.GetComponent<WPManager>().wayPoints;
+        g = wpManager.GetComponent<WPManager>().graph;
+
+        currentNode = wps[0];
+
+        Invoke(nameof(GoTo6), 2);
     }
 
-    void ProgressTracker()
-    {
-        if (Vector3.Distance(tracker.transform.position, transform.position) >= lookAhead) return;
 
-        Vector3 currentWPPos = waypoints[currentWayPoint].transform.position;
-        if (Vector3.Distance(tracker.transform.position, currentWPPos) < 3.0f)
+    public void GoTo6()
+    {
+        GoToPoint(5);
+    }
+
+    public void GoToPoint(int index)
+    {
+        g.AStar(currentNode, wps[index]);
+        curWP = 0;
+    }
+
+    void LateUpdate()
+    {
+        if (g.pathList.Count <= 0 || curWP >= g.pathList.Count) return;
+
+        if (Vector3.Distance(transform.position, g.pathList[curWP].getID().transform.position) < accuracy)
         {
-            currentWayPoint++;
-            if (currentWayPoint >= waypoints.Length)
-            {
-                currentWayPoint = 0;
-            }
+            currentNode = g.pathList[curWP].getID();
+            curWP++;
         }
-        tracker.transform.LookAt(currentWPPos);
-        tracker.transform.Translate(0, 0, speed * 5.1f * Time.deltaTime);
-    }
 
-    void Update()
-    {
-        Vector3 currentWPPos = waypoints[currentWayPoint].transform.position;
+        if (curWP < g.pathList.Count)
+        {
+            goal = g.pathList[curWP].getID().transform;
+            Vector3 lookAtGoal = new Vector3(goal.position.x, transform.position.y, goal.transform.position.z);
 
-        ProgressTracker();
+            Vector3 dir = lookAtGoal - transform.position;
 
-        //transform.LookAt(waypoints[currentWayPoint].transform.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotSpeed);
 
-        // SLERP (so thirsty)
-        Quaternion lookatWP = quaternion.LookRotation(tracker.transform.position - transform.position, Vector3.up);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookatWP, Time.deltaTime * rotSpeed);
-        transform.Translate(0, 0, speed * Time.deltaTime);
-
-
+            transform.Translate(0, 0, speed * Time.deltaTime);
+        }
     }
 }

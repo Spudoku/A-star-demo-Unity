@@ -179,14 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3c6ffde2ca8e46b32caf65cf691dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 290642106}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  rotSpeed: 1
-  speed: 15
+  wpManager: {fileID: 0}
   lookAhead: 10
 --- !u!135 &51974298
 SphereCollider:
@@ -1044,7 +1037,7 @@ Transform:
   m_GameObject: {fileID: 313099251}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.818678, y: 1.12, z: -21.22}
+  m_LocalPosition: {x: -27, y: 1.12, z: 8.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1064,14 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3c6ffde2ca8e46b32caf65cf691dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 290642106}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  rotSpeed: 10
-  speed: 9
+  wpManager: {fileID: 1523051547}
   lookAhead: 10
 --- !u!54 &313099257
 Rigidbody:
@@ -2406,14 +2392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3c6ffde2ca8e46b32caf65cf691dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 290642106}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  rotSpeed: 10
-  speed: 9
+  wpManager: {fileID: 0}
   lookAhead: 10
 --- !u!135 &1077138876
 SphereCollider:
@@ -3468,14 +3447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3c6ffde2ca8e46b32caf65cf691dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 290642106}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  rotSpeed: 8
-  speed: 8
+  wpManager: {fileID: 0}
   lookAhead: 10
 --- !u!135 &1445161493
 SphereCollider:
@@ -3604,8 +3576,8 @@ MonoBehaviour:
   - {fileID: 154520092}
   - {fileID: 555059592}
   links:
-  - node1: {fileID: 0}
-    node2: {fileID: 0}
+  - node1: {fileID: 290642106}
+    node2: {fileID: 154520092}
     dir: 1
   - node1: {fileID: 290642106}
     node2: {fileID: 1976158565}
@@ -3634,7 +3606,7 @@ MonoBehaviour:
   - node1: {fileID: 154520092}
     node2: {fileID: 1976158565}
     dir: 1
-  - node1: {fileID: 1093466969}
+  - node1: {fileID: 1756088387}
     node2: {fileID: 555059592}
     dir: 1
 --- !u!4 &1523051549
@@ -4012,14 +3984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3c6ffde2ca8e46b32caf65cf691dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 290642106}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  rotSpeed: 10
-  speed: 15
+  wpManager: {fileID: 0}
   lookAhead: 10
 --- !u!135 &1857112418
 SphereCollider:
@@ -4458,14 +4423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3c6ffde2ca8e46b32caf65cf691dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 290642106}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  rotSpeed: 8
-  speed: 8
+  wpManager: {fileID: 0}
   lookAhead: 10
 --- !u!135 &1981415809
 SphereCollider:
