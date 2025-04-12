@@ -2,6 +2,11 @@ using UnityEngine;
 
 
 [System.Serializable]
+
+// Manages a collection of Nodes, Edges and Links
+
+// represents a Uni- or billateral connection between
+// Nodes
 public class Link
 {
     public enum direction { UNI, BI }
@@ -20,7 +25,7 @@ public class WPManager : MonoBehaviour
 
     public Graph graph = new Graph();
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         if (wayPoints.Length > 0)
@@ -32,6 +37,9 @@ public class WPManager : MonoBehaviour
             foreach (Link l in links)
             {
                 graph.AddEdge(l.node1, l.node2);
+
+                // if the direction is BI, connect 
+                // nodes in both directions
                 if (l.dir == Link.direction.BI)
                 {
                     graph.AddEdge(l.node2, l.node1);
@@ -40,9 +48,4 @@ public class WPManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

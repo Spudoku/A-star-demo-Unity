@@ -1,16 +1,13 @@
-using System.Linq;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class FollowWaypoint : MonoBehaviour
 {
     Transform goal;
 
     [SerializeField] float speed = 10.0f;
-    float accuracy = 5.0f;
-    float rotSpeed = 2.0f;
+    [SerializeField] float accuracy = 5.0f;     // how close the gameObject must be in order to 'reach' 
+                                                // a node
+    [SerializeField] float rotSpeed = 2.0f;     // how quickly this object can rotate, in degrees per frame
 
     public GameObject wpManager;
     GameObject[] wps;

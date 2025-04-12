@@ -1,4 +1,5 @@
-
+// Represents a connection between
+// two Node objects
 public class Edge
 {
     public Node startNode;

@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// This class stores a location (in the form of a GameObject), as well
+// as factors to calcuate f(n).
 public class Node
 {
-    public List<Edge> edges = new List<Edge>();
+    public List<Edge> edges = new();
 
 
     public Node path = null;
 
-    GameObject id;
+    readonly GameObject id;
 
     public float f, g, h;   // f(n), g(n) and h(n) respectively
     public Node cameFrom;

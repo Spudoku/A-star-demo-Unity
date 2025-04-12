@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// initializes Cameras for a split-screen view
 public class CamManager : MonoBehaviour
 {
     [SerializeField] Camera playerCam;
