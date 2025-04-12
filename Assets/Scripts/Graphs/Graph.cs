@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Xml;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Graph
@@ -51,11 +49,8 @@ public class Graph
 
         if (start == null || end == null) return false;
 
-        List<Node> open = new List<Node>();
-        List<Node> closed = new List<Node>();
-
-        float tentativeGScore = 0;
-
+        List<Node> open = new();
+        List<Node> closed = new();
         bool tentativeIsBetter;
 
         start.g = 0;
@@ -80,6 +75,7 @@ public class Graph
 
             Node neighbor;
 
+            // search all nodes adjacent to current
             foreach (Edge e in thisNode.edges)
             {
                 neighbor = e.endNode;
@@ -89,7 +85,7 @@ public class Graph
                     continue;
                 }
 
-                tentativeGScore = thisNode.g + Distance(thisNode, neighbor);
+                float tentativeGScore = thisNode.g + Distance(thisNode, neighbor);
                 if (open.IndexOf(neighbor) == -1)
                 {
                     open.Add(neighbor);
