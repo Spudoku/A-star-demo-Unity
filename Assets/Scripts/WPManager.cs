@@ -2,7 +2,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public struct Link
+public class Link
 {
     public enum direction { UNI, BI }
 

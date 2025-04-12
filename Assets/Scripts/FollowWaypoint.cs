@@ -1,5 +1,6 @@
 using System.Linq;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -7,7 +8,7 @@ public class FollowWaypoint : MonoBehaviour
 {
     Transform goal;
 
-    float speed = 5.0f;
+    [SerializeField] float speed = 10.0f;
     float accuracy = 5.0f;
     float rotSpeed = 2.0f;
 
@@ -30,7 +31,7 @@ public class FollowWaypoint : MonoBehaviour
 
 
         // wait for waypoints to load
-        Invoke(nameof(GoTo6), 2);
+        //Invoke(nameof(GoTo6), 2);
 
     }
 
@@ -43,32 +44,19 @@ public class FollowWaypoint : MonoBehaviour
     public void GoToPoint(int index)
     {
         currentNode = GetClosestWP();
-        g.AStar(currentNode, wps[index]);
+        if (g.AStar(currentNode, wps[index]))
+        {
+            Debug.Log($"Found path to waypoint " + index);
+        }
+        else
+        {
+            Debug.Log($"No path found to {index}");
+        }
         curWP = 0;
     }
 
     void LateUpdate()
     {
-        if (g.pathList.Count <= 0 || curWP >= g.pathList.Count) return;
-
-        if (Vector3.Distance(transform.position, g.pathList[curWP].getID().transform.position) < accuracy)
-        {
-            currentNode = g.pathList[curWP].getID();
-            curWP++;
-        }
-
-        if (curWP < g.pathList.Count)
-        {
-            goal = g.pathList[curWP].getID().transform;
-            Vector3 lookAtGoal = new Vector3(goal.position.x, transform.position.y, goal.transform.position.z);
-
-            Vector3 dir = lookAtGoal - transform.position;
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotSpeed);
-
-            transform.Translate(0, 0, speed * Time.deltaTime);
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Debug.Log("Going to point 1");
@@ -119,6 +107,28 @@ public class FollowWaypoint : MonoBehaviour
             Debug.Log("Going to point 10");
             GoToPoint(9);
         }
+
+        if (g.pathList.Count <= 0 || curWP >= g.pathList.Count) return;
+
+        if (Vector3.Distance(transform.position, g.pathList[curWP].getID().transform.position) < accuracy)
+        {
+            currentNode = g.pathList[curWP].getID();
+            curWP++;
+        }
+
+        if (curWP < g.pathList.Count)
+        {
+            goal = g.pathList[curWP].getID().transform;
+            Vector3 lookAtGoal = new Vector3(goal.position.x, transform.position.y, goal.transform.position.z);
+
+            Vector3 dir = lookAtGoal - transform.position;
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotSpeed);
+
+            transform.Translate(0, 0, speed * Time.deltaTime);
+        }
+
+
     }
 
 
@@ -132,12 +142,14 @@ public class FollowWaypoint : MonoBehaviour
         // Current Waypoint
         if (currentNode != null)
         {
-            GUI.Label(new Rect(10, 10, 200, 50), $"Current waypoint: {currentNode.name}", debugStyle);
+            GUI.Label(new Rect(10, 10, 500, 50), $"Current waypoint: {currentNode.name}", debugStyle);
         }
         else
         {
-            GUI.Label(new Rect(10, 10, 200, 50), $"Current waypoint: NULL", debugStyle);
+            GUI.Label(new Rect(10, 10, 500, 50), $"Current waypoint: NULL", debugStyle);
         }
+        // path list
+        GUI.Label(new Rect(10, 60, 500, 100), PrintPathList(), debugStyle);
 
     }
 
@@ -158,5 +170,15 @@ public class FollowWaypoint : MonoBehaviour
         }
         Debug.Log($"Nearest Waypoint is {nearest.name}");
         return nearest;
+    }
+
+    string PrintPathList()
+    {
+        string print = "Pathlist: ";
+        foreach (Node p in g.pathList)
+        {
+            print += p.getID().name + " ";
+        }
+        return print;
     }
 }
