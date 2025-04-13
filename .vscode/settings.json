@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Waypoints.sln"
+    "dotnet.defaultSolution": "Waypoints_DEPRECATED.sln"
 }
