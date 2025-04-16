@@ -142,6 +142,8 @@ public class Graph
         pathList.Clear();
         pathList.Add(endID);
         var p = endID.cameFrom;
+        // backtrack from endID to startID
+        // using cameFrom field
         while (p != startID && p != null)
         {
             pathList.Insert(0, p);

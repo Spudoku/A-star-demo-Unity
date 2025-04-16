@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 // This class stores a location (in the form of a GameObject), as well
 // as factors to calcuate f(n).
 public class Node
